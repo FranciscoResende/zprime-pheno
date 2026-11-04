@@ -1,0 +1,6 @@
+*.root
+*.lhe.gz
+*.hepmc.gz
+*.hepmc
+__pycache__/
+.ipynb_checkpoints/
