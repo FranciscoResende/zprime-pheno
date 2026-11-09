@@ -14,3 +14,10 @@
 - alpha from sm param_card: aEWM1 = 132.507
 - Hand: 1.376 pb | MadGraph (run_02): 1.377 +- 0.0004 pb  -> agreement
 - Note: systematics module fails without PDFs -> use_syst False
+## 2026-11-09 - Drell Yang process, full chain
+- Understanding the parton density function, how one can visualize it as cross section of the partons times the parton luminosity
+- changing parameters of the Cards so as to simulate an actual pp collision
+- Pythia, with its parton shower, hadronisation, FSR and ISR, and some decays
+- Delphes, detector effects, parametric
+- First root plot, peak at half Z mass, resonance production, steep drop of from the jacobian, long tail from photon production
+- Next: mll.py (uproot), 3-level overlay, mass slices, ttbar
