@@ -38,3 +38,24 @@
   my prediction: ...
 - Running: cards/dy_slices.mg5 (60-120, 120-200, 500-1000, 1000-2000, 2000+; iseeds 3-7)
 - Next: ttbar (dimuon), stitching with sigma/N weights, three-level overlay
+## 2026-11-15 (cont.) — DY mass slices + ttbar background
+- DY slices: test_dy, ATLAS Delphes card, 10k events each, ptl>10, |etal|<2.5
+  script: cards/dy_slices.mg5 (iseeds 3-7; 200-500 run separately, iseed 2)
+  | slice (GeV) | sigma (pb)  | sigma/dm (pb/GeV) |
+  | 60-120      | 643.99      | 1.07e+1 |
+  | 120-200     | 6.9965      | 8.7e-2  |
+  | 200-500     | 1.2259      | 4.1e-3  |
+  | 500-1000    | 0.0572      | 1.1e-4  |
+  | 1000-2000   | 3.982e-3    | 4.0e-6  |
+  | 2000+       | 1.336e-4    | -       |
+- Sum check: sum of slices = 652.3 pb vs inclusive run_02 (m>60) 650.7 +- 1.4 pb
+  -> agree within ~1 sigma: no gaps / double counting
+- Fall-off: m^3 * sigma/dm ~1.8e5 (350 GeV) -> ~1.3e4 (1500 GeV), x13
+  (parton luminosity); consistent with 9 Nov prediction (x15-25 over 200-2000 GeV)
+- 2000+: 0.13 fb -> ~19 DY events in 140 fb^-1 before selection
+- ttbar -> b b~ mu+ mu- vm vm~ (decay chains), ATLAS card, iseed 8, 10k events
+  output on EOS: /eos/user/f/frresend/zprime-data/ttbar_mumu (run ttbar_mumu_01)
+  sigma = 5.692 +- 0.013 pb vs hand 500 pb x 0.106^2 = 5.6 pb
+  (MG LO BR(W->mu nu) ~ 1/9 -> implies sigma_ttbar(LO) ~ 460 pb)
+- Note: new process folders go to EOS from now on (workspace quota, hepmc size)
+- Next: stitch slices (weights sigma/N), overlay ttbar, three-level overlay
