@@ -1,0 +1,45 @@
+launch test_dy -n dy_60_120
+shower=Pythia8
+detector=Delphes
+done
+set mmll 60
+set mmllmax 120
+set nevents 10000
+set iseed 3
+done
+launch test_dy -n dy_120_200
+shower=Pythia8
+detector=Delphes
+done
+set mmll 120
+set mmllmax 200
+set nevents 10000
+set iseed 4
+done
+launch test_dy -n dy_500_1000
+shower=Pythia8
+detector=Delphes
+done
+set mmll 500
+set mmllmax 1000
+set nevents 10000
+set iseed 5
+done
+launch test_dy -n dy_1000_2000
+shower=Pythia8
+detector=Delphes
+done
+set mmll 1000
+set mmllmax 2000
+set nevents 10000
+set iseed 6
+done
+launch test_dy -n dy_2000plus
+shower=Pythia8
+detector=Delphes
+done
+set mmll 2000
+set mmllmax -1
+set nevents 10000
+set iseed 7
+done

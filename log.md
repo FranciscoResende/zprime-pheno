@@ -21,3 +21,20 @@
 - Delphes, detector effects, parametric
 - First root plot, peak at half Z mass, resonance production, steep drop of from the jacobian, long tail from photon production
 - Next: mll.py (uproot), 3-level overlay, mass slices, ttbar
+- Run: test_dy/Events/run_02, pp > mu+ mu-, 13 TeV, 10k events, seed 1, CMS Delphes card
+- Cuts: ptl > 10, |etal| < 2.5, mmll > 60 GeV
+- sigma = 650.7 pb (vs 844 pb without the mmll cut -> ~190 pb from low-mass gamma*)
+## 2026-11-15 — Z peak fit, mass slices
+- New PC (AlmaLinux 10); VS Code Remote-SSH on lxplus.
+  Fixes: GSSAPIDelegateCredentials (AFS token), .vscode-server -> workspace (home quota, error -122)
+- Selection (run_02, CMS card): 6819/10000 events with exactly 2 muons (68.2%), all opposite-sign
+  (Delphes takes charge from truth -> no charge flips by construction)
+- Z peak: FWHM 4.2 GeV (1/6 GeV bins, 80-100)
+- Voigt fit (80-100 GeV): m0 = 90.952 +- 0.030, sigma = 1.15 +- 0.12, gamma = 1.52 +- 0.12 GeV
+  -> mass resolution ~1.3%; Gamma = 3.04 +- 0.24 (vs 2.50), m0 0.24 GeV low:
+     FSR low-side tail pulls a symmetric Voigt; rho(sigma, gamma) = -0.93
+  TODO: Delta-x in model (N), residuals, parton-level check
+- Slice dy_200_500 (ATLAS card, iseed 2): sigma = 1.226 +- 0.003 pb = 0.19% of sigma(>60)
+  my prediction: ...
+- Running: cards/dy_slices.mg5 (60-120, 120-200, 500-1000, 1000-2000, 2000+; iseeds 3-7)
+- Next: ttbar (dimuon), stitching with sigma/N weights, three-level overlay
