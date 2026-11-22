@@ -59,8 +59,57 @@
   (MG LO BR(W->mu nu) ~ 1/9 -> implies sigma_ttbar(LO) ~ 460 pb)
 - Note: new process folders go to EOS from now on (workspace quota, hepmc size)
 - Next: stitch slices (weights sigma/N), overlay ttbar, three-level overlay
-#22nd November 2026
-- Stitched all slices together, weighing events by the cross section
-- plotted invariant mass logarithmically, summed over cross section and got about 420 pb which makes sense about 70% of the generated cross section because of detector inneficiency
-- saved plot and is commited
+## 2026-11-22 — Week 2 wrap-up: stitched DY, ttbar, mass resolution, Voigt revisited
 
+### Stitched Drell–Yan (6 slices, 60 GeV – inf)
+- Weight per event w_i = sigma_i / N_gen,i (N_gen = 10k, all generated, not selected)
+- One histogram, 60 log-spaced bins (np.geomspace, 60–3000 GeV), slices summed bin by bin,
+  divided by bin width -> dsigma/dm [pb/GeV], log-log
+- No steps at slice edges (120, 200, 500, 1000, 2000) -> weights and ranges consistent
+- sigma after selection (2 OS muons) = 446.8 pb of 652.3 pb generated (68.5%)
+- Shape: Z peak, gamma*/FSR shoulder below, ~power law above 150 GeV, bends down > 1 TeV (PDFs)
+- Plot: plots/Differential_cross_section_Z.png
+
+### ttbar (dimuon) background
+- Same selection/edges, w = 5.692 / 10000
+- 1.96 pb of 5.69 pb pass (34%; softer, less isolated muons next to b-jets)
+- Broad, no peak; closest to DY at ~200–600 GeV, there ~3–5x below DY
+- "max ttbar/DY = 0.54 at ~950 GeV" = single event, not physics
+- No ttbar statistics above ~700 GeV -> if needed in week 5: high-mll ttbar sample with
+  cut_decays = True (default cuts don't reach decay products), stitch on TRUE mll to avoid double counting
+- Plot: plots/mll_dy_ttbar.pdf
+
+### Muon mass resolution (truth vs reco, event by event)
+- Truth: Particle branch, |PID| = 13 & Status = 1, exactly 2, PID sum = 0
+- Reco: Muon branch, exactly 2, charge sum = 0
+- Combined mask (true & reco) applied to both -> same events, same order
+- (m_reco - m_true) / m_true, per slice:
+  - 60–120: std 1.36%, 68% half-width 1.26%, FWHM/2.355 1.10% -> core ~1.1%, non-Gaussian tails
+  - > 2 TeV: ~8–10%
+- Why: sagitta ∝ 1/pT, fixed hit resolution -> sigma_pT/pT = a (mult. scattering, const) ⊕ b*pT;
+  crossover ~100 GeV. Tails = mix of barrel/endcap resolutions
+- Consequence: a 2 TeV Z' is smeared to ~150–200 GeV -> sets the search window
+- Plot: plots/mass_resolution.pdf
+
+### Voigt fit revisited (dy_60_120)
+- Fixed: model = N * voigt * Delta_m -> N = number of events (binning-independent).
+  N > events in window because Lorentzian tails extend outside the window
+- 86–96 GeV window:
+  | level            | Gamma = 2 gamma | m0     |
+  | input (MG)       | 2.50            | 91.19  |
+  | truth post-FSR   | 2.70 +- 0.10    | 91.04  |
+  | reco             | 3.43 +- 0.27    | 90.92  |
+- Narrow window did NOT fix Gamma -> not the far FSR tail. Excess = ~0.2 GeV physics
+  (FSR inside the peak, parton lumi, gamma*/Z) + ~0.7 GeV detector (non-Gaussian tails absorbed into gamma)
+- sigma_Voigt ~0.8–0.95 GeV (~1%) agrees with direct resolution core (1.1%)
+- rho(sigma, gamma) = -0.83 / -0.93: strongly degenerate
+- Plot: plots/voigt_fit_Z.pdf
+
+### Open / low priority
+- Pre-FSR Voigt fit (should give Gamma = 2.50)
+- Unexplained m0 shift truth -> reco (-0.12 +- 0.04 GeV)
+- Use ONE Delphes card for all samples from now on (run_02 was CMS, slices ATLAS — check)
+- Parton vs detector overlay: quick version done (see plots/truth_vs_reco.pdf)
+
+### Next
+- Week 3: install FeynRules, test with Mathematica, IDPASC Z' tutorial
