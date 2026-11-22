@@ -59,3 +59,8 @@
   (MG LO BR(W->mu nu) ~ 1/9 -> implies sigma_ttbar(LO) ~ 460 pb)
 - Note: new process folders go to EOS from now on (workspace quota, hepmc size)
 - Next: stitch slices (weights sigma/N), overlay ttbar, three-level overlay
+#22nd November 2026
+- Stitched all slices together, weighing events by the cross section
+- plotted invariant mass logarithmically, summed over cross section and got about 420 pb which makes sense about 70% of the generated cross section because of detector inneficiency
+- saved plot and is commited
+
